@@ -11,7 +11,7 @@ The source class parse the content of this webpage listing recent hearthquakes (
 After cloning this repository, the source class, cube class, pivot and dashboard can be imported as usual using Studio or Atelier, or from terminal as follows:
 
 ```
-Set path="<path-to-local-files>/"
+Set path="<path-to-local-files>"
 Write $system.OBJ.Load(path_"Erdbeben.xml","cf")
 Write $system.OBJ.Load(path_"ErdbebenCube.xml","cf")
 Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"ErdbebenPivot.xml")
