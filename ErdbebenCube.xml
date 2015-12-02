@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for UNIX (SUSE Linux Enterprise Server for x86-64) 2016.2 (Build 533)" ts="2015-12-02 12:06:11">
+<Class name="Ale.ErdbebenCube">
+<Description><![CDATA[
+This class contains a cube based on DeepSee.Study.Patients. 
+<p>This class also contains utility methods used by this cube.]]></Description>
+<Super>%DeepSee.CubeDefinition</Super>
+<TimeChanged>63888,43108.979093</TimeChanged>
+<TimeCreated>63651,58145.63575</TimeCreated>
+<DependsOn>Ale.Erdbeben</DependsOn>
+
+<XData name="Cube">
+<Description>
+Cube definition from Architect.</Description>
+<XMLNamespace>http://www.intersystems.com/deepsee</XMLNamespace>
+<Data><![CDATA[
+<cube xmlns="http://www.intersystems.com/deepsee" name="Erdbeben" displayName="Erdbeben" description="Represents earthquakes in Germany from www.hlug.de/start/geologie/erdbeben/aktuelle-ereignisse.html" disabled="false" abstract="false" sourceClass="Ale.Erdbeben" owner="_SYSTEM" nullReplacement="None" countMeasureName="%COUNT" countMeasureCaption="Erdbeben Count" bucketSize="8" bitmapChunkInMemory="false" defaultListing="Erdbeben listing" precompute="0" disableListingGroups="false">
+  <dimension name="PlatzD" displayName="Platz" disabled="false" hasAll="true" allCaption="Alle Erdbeben" allDisplayName="Alle Erdbeben" type="data" calendar="gregorian" iKnowType="entity" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" displayName="H1" disabled="false" hidden="false">
+      <level name="Regio" disabled="false" sourceProperty="Regio" list="false" useDisplayValue="true" useAsFilter="true" hidden="false">
+        <additionalDescription>undefined</additionalDescription>
+      </level>
+      <level name="Ort" disabled="false" sourceProperty="%ID" list="false" nullReplacement="N.A." useDisplayValue="false" sort="asc numeric" useAsFilter="true" hidden="false">
+        <property name="Ortsname" disabled="false" sourceProperty="Ortsname" hidden="false" sort="asc" isName="true" isDescription="false" isReference="true" useDisplayValue="true">
+          <additionalDescription>undefined</additionalDescription>
+        </property>
+      </level>
+    </hierarchy>
+  </dimension>
+  <dimension name="MagnitudeD" displayName="Magnitude" disabled="false" hasAll="true" allCaption="Alle Erdbeben" allDisplayName="Alle Erdbeben" type="data" calendar="gregorian" iKnowType="entity" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" displayName="H1" disabled="false" hidden="false">
+      <level name="Magnitude" disabled="false" sourceProperty="Magnitude" list="false" useDisplayValue="true" sort="asc" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+  </dimension>
+  <dimension name="BreiteD" displayName="Breite" disabled="false" hasAll="true" allCaption="Alle Erdbeben" allDisplayName="Alle Erdbeben" type="data" calendar="gregorian" iKnowType="entity" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" displayName="H1" disabled="false" hidden="false">
+      <level name="Breite" displayName="Breite" description="Breite" disabled="false" sourceProperty="Breite" factName="DxBreite" list="false" useDisplayValue="false" sort="asc numeric" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+  </dimension>
+  <dimension name="LängeD" displayName="Länge" disabled="false" hasAll="true" allCaption="Alle Erdbeben" allDisplayName="Alle Erdbeben" type="data" calendar="gregorian" iKnowType="entity" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" displayName="H1" disabled="false" hidden="false">
+      <level name="Länge" disabled="false" sourceProperty="Länge" list="false" useDisplayValue="true" sort="asc numeric" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+  </dimension>
+  <dimension name="TiefeD" displayName="Tiefe" disabled="false" hasAll="true" allCaption="Alle Erdbeben" allDisplayName="Alle Erdbeben" type="data" calendar="gregorian" iKnowType="entity" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" displayName="H1" disabled="false" hidden="false">
+      <level name="Tiefe" disabled="false" sourceProperty="Tiefe" list="false" useDisplayValue="true" sort="asc numeric" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+  </dimension>
+  <dimension name="Typ" disabled="false" hasAll="false" allCaption="All Other" allDisplayName="Other" type="data" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" disabled="false" hidden="false">
+      <level name="Typ" disabled="false" sourceProperty="Typ" list="false" useDisplayValue="true" sort="desc" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+  </dimension>
+  <dimension name="ErdbebenID" disabled="false" hasAll="false" allCaption="All Other" allDisplayName="Other" type="data" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" disabled="false" hidden="false">
+      <level name="ErdbebenID" disabled="false" sourceProperty="ErdbebenID" list="false" useDisplayValue="true" sort="asc numeric" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+  </dimension>
+  <dimension name="Datum" disabled="false" hasAll="false" allCaption="All DatumZeit2" allDisplayName="DatumZeit2" sourceExpression="%source.ErdbebensDatum" type="time" calendar="gregorian" iKnowType="entity" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" disabled="false" hidden="false">
+      <level name="Datum" disabled="false" timeFunction="DayMonthYear" list="false" useDisplayValue="true" sort="desc" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+    <additionalDescription>undefined</additionalDescription>
+  </dimension>
+  <dimension name="Zeit" disabled="false" hasAll="false" allCaption="All Zeit" allDisplayName="Zeit" type="data" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" disabled="false" hidden="false">
+      <level name="Zeit" disabled="false" sourceExpression="$ZT(%source.ErdbebensZeit)" list="false" useDisplayValue="true" sort="desc" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+  </dimension>
+  <measure name="Magnitude" disabled="false" sourceProperty="Magnitude" aggregate="AVG" type="number" hidden="false" searchable="false">
+  </measure>
+  <measure name="Tiefe" disabled="false" sourceProperty="Tiefe" aggregate="AVG" type="number" hidden="false" searchable="false">
+  </measure>
+  <measure name="Latitude" disabled="false" sourceProperty="Breite" aggregate="AVG" type="number" hidden="false" searchable="false">
+    <additionalDescription>undefined</additionalDescription>
+  </measure>
+  <measure name="Longitude" disabled="false" sourceProperty="Länge" aggregate="AVG" type="number" hidden="false" searchable="false">
+    <additionalDescription>undefined</additionalDescription>
+  </measure>
+  <measure name="Breite" disabled="false" sourceProperty="Breite" aggregate="AVG" type="number" hidden="false" searchable="false">
+  </measure>
+  <measure name="Länge" disabled="false" sourceProperty="Länge" aggregate="AVG" type="number" hidden="false" searchable="false">
+  </measure>
+  <listing name="Erdbeben listing" displayName="Erdbeben listing" disabled="false" listingType="table" fieldList="%ID,ErdbebenID,ErdbebensDatum,ErdbebensZeit,Breite,Länge,Magnitude,Ortsname,Tiefe,Typ,erdCount,Files" orderBy="ErdbebensDatum,ErdbebensZeit">
+  </listing>
+</cube>
+]]></Data>
+</XData>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^Ale.ErdbebenCubeD</DataLocation>
+<DefaultData>ErdbebenCubeDefaultData</DefaultData>
+<IdLocation>^Ale.ErdbebenCubeD</IdLocation>
+<IndexLocation>^Ale.ErdbebenCubeI</IndexLocation>
+<StreamLocation>^Ale.ErdbebenCubeS</StreamLocation>
+<Data name="ErdbebenCubeDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+</Data>
+</Storage>
+
+<Parameter name="DOMAIN">
+<Default>PATIENTSAMPLE</Default>
+</Parameter>
+</Class>
+</Export>
