@@ -12,8 +12,8 @@ After cloning this repository, the source class, cube class, pivot and dashboard
 
 ```
 Set path="<path-to-local-files>"
-Write $system.OBJ.Load(path_"Erdbeben.xml","cf")
-Write $system.OBJ.Load(path_"ErdbebenCube.xml","cf")
+Write $system.OBJ.Load(path_"Erdbeben.udl","cf")
+Write $system.OBJ.Load(path_"ErdbebenCube.udl","cf")
 Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"ErdbebenPivot.xml",1)
 Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"ErdbebenKartePivot.xml",1)
 Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"ErdbebenDashboard.xml",1)
@@ -28,5 +28,5 @@ Do ##class(%DeepSee.Utils).%BuildCube("Erdbeben")
 
 Screenshot of the "Erdbeben" dashboard:
 
-![Alt text](https://github.com/aless80/DeepSee-Erdbeben/blob/master/DeepSee-Erdbeben Dashboard.png "DeepSee-Erdbeben Dashboard")
+[Alt text](https://github.com/aless80/DeepSee-Erdbeben/blob/master/DeepSee-Erdbeben Dashboard.png "DeepSee-Erdbeben Dashboard")
 

@@ -1,69 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Export generator="Cache" version="25" zv="Cache for UNIX (SUSE Linux Enterprise Server for x86-64) 2017.2.1 (Build 801)" ts="2018-01-11 17:28:52">
-<Class name="Ale.Erdbeben">
-<Super>%Persistent</Super>
-<TimeChanged>64659,62500.249214</TimeChanged>
-<TimeCreated>63887,56919.26784</TimeCreated>
+Class Ale.Erdbeben Extends %Persistent
+{
 
-<Property name="erdCount">
-<Type>%Integer</Type>
-</Property>
+Property erdCount As %Integer;
 
-<Property name="ErdbebenID">
-<Type>%String</Type>
-</Property>
+Property ErdbebenID As %String;
 
-<Property name="ErdbebensDatum">
-<Type>%Date</Type>
-</Property>
+Property ErdbebensDatum As %Date;
 
-<Property name="ErdbebensZeit">
-<Type>%Time</Type>
-</Property>
+Property ErdbebensZeit As %Time;
 
-<Property name="Ortsname">
-<Type>%String</Type>
-</Property>
+Property Ortsname As %String;
 
-<Property name="Regio">
-<Type>%String</Type>
-</Property>
+Property Regio As %String;
 
-<Property name="Magnitude">
-<Type>%Numeric</Type>
-</Property>
+Property Magnitude As %Numeric;
 
-<Property name="Breite">
-<Type>%Numeric</Type>
-</Property>
+Property Breite As %Numeric;
 
-<Property name="Länge">
-<Type>%Numeric</Type>
-</Property>
+Property Länge As %Numeric;
 
-<Property name="Tiefe">
-<Type>%Integer</Type>
-</Property>
+Property Tiefe As %Integer;
 
-<Property name="Typ">
-<Type>%String</Type>
-</Property>
+Property Typ As %String;
 
-<Property name="Files">
-<Type>%String</Type>
-<Parameter name="MAXLEN" value="250"/>
-</Property>
+Property Files As %String(MAXLEN = 250);
 
-<Method name="GetRawTextFromLink">
-<Description><![CDATA[
-To get the data run: Do ##class(Ale.Erdbeben).GenerateData()
-
-GetRawTextFromLink derives the server name and URL from <var>pLink</var> and then uses these to target a
-<class>%Net.HttpRequest</class> at the article, returning its raw content as a string.]]></Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>pLink:%String,*pSC:%Status</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+/// To get the data run: Do ##class(Ale.Erdbeben).GenerateData()
+/// 
+/// GetRawTextFromLink derives the server name and URL from <var>pLink</var> and then uses these to target a
+/// <class>%Net.HttpRequest</class> at the article, returning its raw content as a string.
+ClassMethod GetRawTextFromLink(pLink As %String, Output pSC As %Status) As %String
+{
 	I $D(pLink)=0 { //CHANGE/RM
 		S pLink="http://www.hlug.de/start/geologie/erdbeben/aktuelle-ereignisse.html"
 		S pLink=$e(pLink,$find(pLink,"http://"),*) 										
@@ -112,14 +79,10 @@ GetRawTextFromLink derives the server name and URL from <var>pLink</var> and the
 		set pSC = ex.AsStatus()
 	}
 	quit tRawText
-]]></Implementation>
-</Method>
+}
 
-<Method name="GetTableFromRawText">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>raw:%String,*table:%Status</FormalSpec>
-<ReturnType>%String</ReturnType>
-<Implementation><![CDATA[
+ClassMethod GetTableFromRawText(raw As %String, Output table As %Status) As %String
+{
  	I $D(raw)=0 { 
 	 	S raw=..GetRawTextFromLink() 
  	}
@@ -127,16 +90,11 @@ GetRawTextFromLink derives the server name and URL from <var>pLink</var> and the
 	S end=$find(raw,"</table>",begin)
 	S table=$E(raw,begin,end)
 	Q table
-]]></Implementation>
-</Method>
+}
 
-<Method name="GetDataFromTable">
-<Description>
-run:  Do ##class(Ale.Erdbeben).GetDataFromTable(,.line,.erdCount)</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec><![CDATA[pLink:%String,&line:%String,*erdCount:%Integer]]></FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+/// run:  Do ##class(Ale.Erdbeben).GetDataFromTable(,.line,.erdCount)
+ClassMethod GetDataFromTable(pLink As %String, ByRef line As %String, Output erdCount As %Integer) As %Status
+{
 	/*The last version of the raw text of table in pLink above looks like this:
 	<tr><th>Datum/Uhrzeit</th>  ... title of the table ... 	<th>Typ</th>
 	</tr>
@@ -203,21 +161,12 @@ run:  Do ##class(Ale.Erdbeben).GetDataFromTable(,.line,.erdCount)</Description>
  	S erdCount=i-1
  	W !,"I found "_erdCount_" lines",!! 
  	Q $$$OK
-]]></Implementation>
-</Method>
+}
 
-<UDLText name="T">
-<Content><![CDATA[
 // run: Do ##class(Ale.Erdbeben).GenerateData()
 
-]]></Content>
-</UDLText>
-
-<Method name="GenerateData">
-<ClassMethod>1</ClassMethod>
-<FormalSpec>maxCount:%Integer</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+ClassMethod GenerateData(maxCount As %Integer) As %Status
+{
     Set status=$$$OK
     Write !, "Deleting Erdbeben data..."
     //first kill extent and kill extents of child tables (none for Ale.Erdbeben)
@@ -230,16 +179,11 @@ run:  Do ##class(Ale.Erdbeben).GetDataFromTable(,.line,.erdCount)</Description>
 		Set status=..GetErdbeben(maxCount)
 	}    
     Quit status
-]]></Implementation>
-</Method>
+}
 
-<Method name="GetErdbeben">
-<Description>
-run: Do ##class(Ale.Erdbeben).GetErdbeben() and then build the Erdbeben cube</Description>
-<ClassMethod>1</ClassMethod>
-<FormalSpec>records:%Integer</FormalSpec>
-<ReturnType>%Status</ReturnType>
-<Implementation><![CDATA[
+/// run: Do ##class(Ale.Erdbeben).GetErdbeben() and then build the Erdbeben cube
+ClassMethod GetErdbeben(records As %Integer) As %Status
+{
 	W !,"Parsing data from http://www.hlug.de/start/geologie/erdbeben/aktuelle-ereignisse.html",!
 	D ..%KillExtent()
 	S status=..GetDataFromTable(,.line, .erdCount) 
@@ -268,16 +212,10 @@ run: Do ##class(Ale.Erdbeben).GetErdbeben() and then build the Erdbeben cube</De
 	Write !
     Write records," erdbenen stored in Ale.erdbeben"
     Quit status
-]]></Implementation>
-</Method>
+}
 
-<Storage name="Default">
-<Type>%Library.CacheStorage</Type>
-<DataLocation>^Ale.ErdbebenD</DataLocation>
-<DefaultData>ErdbebenDefaultData</DefaultData>
-<IdLocation>^Ale.ErdbebenD</IdLocation>
-<IndexLocation>^Ale.ErdbebenI</IndexLocation>
-<StreamLocation>^Ale.ErdbebenS</StreamLocation>
+Storage Default
+{
 <Data name="ErdbebenDefaultData">
 <Value name="1">
 <Value>%%CLASSNAME</Value>
@@ -319,6 +257,13 @@ run: Do ##class(Ale.Erdbeben).GetErdbeben() and then build the Erdbeben cube</De
 <Value>Files</Value>
 </Value>
 </Data>
-</Storage>
-</Class>
-</Export>
+<DataLocation>^Ale.ErdbebenD</DataLocation>
+<DefaultData>ErdbebenDefaultData</DefaultData>
+<IdLocation>^Ale.ErdbebenD</IdLocation>
+<IndexLocation>^Ale.ErdbebenI</IndexLocation>
+<StreamLocation>^Ale.ErdbebenS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}
+
