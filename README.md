@@ -28,5 +28,5 @@ Do ##class(%DeepSee.Utils).%BuildCube("Erdbeben")
 
 Screenshot of the "Erdbeben" dashboard:
 
-[Alt text](https://github.com/aless80/DeepSee-Erdbeben/blob/master/Erdbeben.png "DeepSee-Erdbeben Dashboard")
+![Alt text](https://github.com/aless80/DeepSee-Erdbeben/blob/master/DeepSee-Erdbeben.png "DeepSee-Erdbeben Dashboard")
 
