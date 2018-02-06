@@ -16,7 +16,7 @@ Write $system.OBJ.Load(path_"Erdbeben.cls","cf")
 Write $system.OBJ.Load(path_"ErdbebenCube.cls","cf")
 Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"Erdbeben-Erdbeben.pivot.DFI",1)
 Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"Erdbeben-Erdbeben_Karte.pivot.DFI",1)
-Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"ErdbebenDashboard.DFI",1)
+Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"Erdbeben-Erdbeben.dashboard.DFI",1)
 ```
 
 If your instance does not support UDL formatting please use the .xml files in the xml directory. 
