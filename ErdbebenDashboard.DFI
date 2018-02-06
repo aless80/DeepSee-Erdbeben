@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<dashboard xmlns="http://www.intersystems.com/deepsee/library" name="Erdbeben" folderName="Erdbeben" title="" description="" keywords="" owner="" shared="true" public="true" locked="false" resource="" timeCreated="2015-04-16T14:46:04.853Z" createdBy="UnknownUser" category="" bookCover="" scheme="" worklistCount="1" snapTo="true" snapGrid="true" gridRows="10" gridCols="10" canResize="true" canModify="true" showTitleBar="true" titleBarOpacity="" titleBarColor="" selectedTitleBarOpacity="" selectedTitleBarColor="" titleBarTextColor="" selectedTitleBarTextColor="" titleBarFont="" companyName="" companyLogo="" companyStyle="" backgroundColor="white" backgroundImage="none" backgroundRepeat="no-repeat" backgroundSize="100% 100%" backgroundOpacity="1" widgetBorders="1px solid #F0F0F0" widgetBordersSwitch="edit" widgetBordersColor="#F0F0F0" widgetBordersStyle="solid" widgetBordersWidth="1" widgetBordersToggle="true">
+  <widget name="Erdbeben Karte" type="map" subtype="" subtypeClass="" title="" dataSource="Erdbeben/Erdbeben_Karte.pivot" dataLink="" drillDownDataSource="" width="200" height="200" sidebarContent="" showSidebar="false" sidebarWidth="" maximized="false" homeRowL="0" homeColL="0" colSpanL="5" rowSpanL="7" showToolbar="true" showToolbarBottomBorder="true" showToolbarOnlyWhenMaximized="false" colorToolbar="#F0F0F0" opacityToolbar="1" backgroundColor="#F0F0F0" opacity="1" theme="" dataColorList="">
+    <control name="" action="applyFilter" target="*" targetProperty="[PlatzD].[H1].[Regio]" location="dashboard" type="auto" controlClass="" label="Regio" title="" value="" text="" readOnly="false" valueList="" displayList="" activeWhen="">
+      <valueRequired>false</valueRequired>
+    </control>
+    <control name="" action="applyFilter" target="*" targetProperty="[Datum].[H1].[Datum]" location="dashboard" type="auto" controlClass="" label="Datum" title="" value="" text="" readOnly="false" valueList="" displayList="" activeWhen="">
+      <valueRequired>false</valueRequired>
+    </control>
+    <dataProperty name="Ortsname" label="Ortsname" width="" align="" subtype="" style="" display="" format="" showAs="" valueColumn="false" summary="" summaryValue="" dataValue="Ortsname" targetValue="" thresholdLower="" thresholdUpper="" rangeLower="" rangeUpper="" baseValue="" override=""></dataProperty>
+    <property name="markersdraggable">0</property>
+    <property name="zoom">2</property>
+  </widget>
+  <widget name="Erbeben Zeit" type="pivot" subtype="timeChart" subtypeClass="comboChart" title="" dataSource="Erdbeben/Erdbeben.pivot" dataLink="" drillDownDataSource="" width="200" height="200" sidebarContent="" showSidebar="false" sidebarWidth="" maximized="false" homeRowL="0" homeColL="5" colSpanL="4" rowSpanL="6" showToolbar="true" showToolbarBottomBorder="true" showToolbarOnlyWhenMaximized="false" colorToolbar="#F0F0F0" opacityToolbar="1" backgroundColor="#F0F0F0" opacity="1" theme="" dataColorList="">
+    <override name="comboChart">{legendVisible:'false',seriesColorScheme:'bright',timeBased:true,xAxis:{_type:'axis'},yAxisList:[{_type:'axis'}],_type:'comboChart'}</override>
+  </widget>
+</dashboard>
