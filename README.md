@@ -14,9 +14,9 @@ After cloning this repository, the source class, cube class, pivot and dashboard
 Set path="<path-to-local-files>"
 Write $system.OBJ.Load(path_"Erdbeben.cls","cf")
 Write $system.OBJ.Load(path_"ErdbebenCube.cls","cf")
-Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"ErdbebenPivot.xml",1)
-Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"ErdbebenKartePivot.xml",1)
-Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"ErdbebenDashboard.xml",1)
+Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"Erdbeben-Erdbeben.pivot.DFI",1)
+Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"Erdbeben-Erdbeben_Karte.pivot.DFI",1)
+Do ##class(%DeepSee.UserLibrary.Utils).%Import(path_"ErdbebenDashboard.DFI",1)
 ```
 
 To generate data based on the name frequency in the 1990s in the US and to build the DeepSee cube please run: 
